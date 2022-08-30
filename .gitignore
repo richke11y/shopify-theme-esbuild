@@ -7,3 +7,15 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Project #
+###################
+dist
+node_modules
+config.yml
+npm-debug.log
+.env
+.env.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
