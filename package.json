@@ -2,12 +2,22 @@
   "name": "shopify-theme-esbuild",
   "version": "0.0.1",
   "private": false,
-  "description": "",
-  "repository": "https://github.com/richke11y/shopify-theme-esbuild.git",
+  "description": "A bare-bones, Shopify Theme boilerplate that couples the Shopify CLI with esbuild to bundle and compile CSS and JS and provide you a local development environment.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richke11y/shopify-theme-esbuild.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rich Kelly <rich@richkelly.uk>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "esbuild": "^0.15.6",
+    "esbuild-plugin-sass": "^1.0.1",
+    "npm-run-all": "^4.1.5",
+    "recursive-fs": "^2.1.0"
+  }
 }
