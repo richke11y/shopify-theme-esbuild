@@ -1,0 +1,16 @@
+./node_modules
+./src/fonts/**/*.*
+./src/img/**/*.*
+./src/js/components/**/*.js
+./src/js/sections/**/*.js
+./src/js/templates/**/*.js
+./src/js/**/*.js
+./src/scss/**/*.*
+./src/svg/**/*.svg
+.gitignore
+CHANGELOG.md
+LICENSE.md
+README.md
+esbuild.js
+package.json
+package-lock.json

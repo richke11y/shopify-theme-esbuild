@@ -1,0 +1,13 @@
+{
+  "name": "shopify-theme-esbuild",
+  "version": "0.0.1",
+  "private": false,
+  "description": "",
+  "repository": "https://github.com/richke11y/shopify-theme-esbuild.git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rich Kelly <rich@richkelly.uk>",
+  "license": "ISC"
+}

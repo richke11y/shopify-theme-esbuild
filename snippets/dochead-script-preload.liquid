@@ -1,0 +1,22 @@
+
+<link rel="preload" href="{{ 'bundle.theme.js' | asset_url }}" as="script" />
+
+{% if template %}
+
+	{% capture script_bundle %}bundle.{{ template.name }}{% if template.suffix %}.{{ template.suffix }}{% endif %}.js{% endcapture %}
+
+	<link rel="preload" href="{{ script_bundle | asset_url }}" as="script" />
+
+{% elsif request.path == '/challenge' %}
+
+	<link rel="preload" href="{{ 'bundle.challenge.js' | asset_url }}" as="script" />
+
+{% else %}
+
+	{% unless checkout %}
+
+		<link rel="preload" href="{{ 'bundle.apps.js' | asset_url }}" as="script" />
+
+	{% endunless %}
+
+{% endif %}
