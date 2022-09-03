@@ -38,17 +38,21 @@
 		{% liquid
 			render 'dochead-script-preload'
 			render 'dochead-style-sheets'
-		%}
 
-		{{ content_for_header }}
+			echo content_for_header
+		%}
 
 	</head>
 
 	<body>
 
-		{{ content_for_layout }}
-
 		{% liquid
+			if request.path == '/challenge'
+				render 'challenge-container', content: content_for_layout
+			else
+				echo content_for_layout
+			endif
+
 			render 'body-script-bundles'
 		%}
 
