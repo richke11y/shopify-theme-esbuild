@@ -1,6 +1,7 @@
 const esbuild = require('esbuild');
 const sassPlugin = require('esbuild-plugin-sass');
 const { entryFilePaths } = require('./entry-file-paths.js');
+// const testModule = require('./test-module.js');
 
 let config = {
 
@@ -27,7 +28,8 @@ esbuild.build({
 	logLevel: 'info',
 	legalComments: config.legalComments,
 	plugins: [
-		sassPlugin()
+		sassPlugin(),
+		// testModule()
 	],
 	loader: {
 		'.eot': 'file',
