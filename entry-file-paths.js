@@ -26,7 +26,7 @@ const entryFilePaths = () => {
 			}
 		
 		});
-	  
+
 		return arrayFilePaths;
 	
 	}
