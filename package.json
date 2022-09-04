@@ -10,26 +10,16 @@
     "url": "git+https://github.com/richke11y/shopify-theme-esbuild.git"
   },
   "scripts": {
-    "start": "NODE_ENV=development run-p clean:assets esbuild shopify:serve copy:static watch:static",
-    "build": "NODE_ENV=production run-s clean:assets esbuild copy:static shopify:check",
+    "start": "NODE_ENV=development run-p esbuild shopify:serve",
+    "build": "NODE_ENV=production run-s esbuild shopify:check",
     "esbuild": "node esbuild.js",
-    "clean:assets": "rm -rf ./assets/*",
-    "copy:static": "run-s copy:css copy:fonts copy:img copy:svg",
-    "copy:css": "recursive-copy './src/css/' './assets'",
-    "copy:fonts": "recursive-copy './src/fonts/' './assets'",
-    "copy:img": "recursive-copy './src/img/' './assets'",
-    "copy:svg": "recursive-copy './src/svg/' './assets'",
     "shopify:check": "shopify theme check --exclude-category html --auto-correct",
     "shopify:serve": "shopify theme serve",
     "shopify:login": "shopify login --store https://MY-SHOPIFY-STORE-URL.myshopify.com/",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch:static": "run-p watch:css watch:fonts watch:img watch:svg",
-    "watch:css": "chokidar \"./src/css/**/*.css\" -c \"npm run copy:css\"",
-    "watch:fonts": "chokidar \"./src/fonts/**/*.*\" -c \"npm run copy:fonts\"",
-    "watch:img": "chokidar \"./src/img/**/*.*\" -c \"npm run copy:img\"",
-    "watch:svg": "chokidar \"./src/svg/**/*.svg\" -c \"npm run copy:svg\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "chokidar": "^3.5.3",
     "chokidar-cli": "^3.0.0",
     "esbuild": "^0.15.6",
     "esbuild-plugin-sass": "^1.0.1",
