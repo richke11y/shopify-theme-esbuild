@@ -5,11 +5,11 @@ const { deleteStaticFile } = require('../functions/delete-static-file.js');
 module.exports = (config) => ({
 
 	name: 'watch-static-files',
-	setup(build) {
+	setup() {
 
 		if (config.mode === 'production') return;
 
-		console.log('Watch Static Files...');
+		console.log('Watching static files...');
 
 		const watcher = chokidar.watch(config.staticFileDirs);
 
@@ -34,7 +34,7 @@ module.exports = (config) => ({
 			console.log(`Deleted: ${filePath}`);
 
 			deleteStaticFile(config.outputDir, filePath);
-		
+
 		});
 
 	}
