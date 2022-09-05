@@ -5,11 +5,11 @@ module.exports = (config) => ({
 	name: 'clean-assets-dir',
 	setup() {
 
-		console.log('Clean Directory ./assets');
-
 		fs.readdir(config.outputDir, (err, files) => {
 
 			if (err) throw err;
+
+			console.log(`Cleaning directory ${config.outputDir}`);
 
 			for (const file of files) {
 
