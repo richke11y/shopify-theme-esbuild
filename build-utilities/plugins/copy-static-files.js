@@ -10,7 +10,7 @@ module.exports = (config) => ({
 
 			if (config.mode === 'development') return;
 
-			console.log('Copy Static Files...');
+			console.log('Copying static files...');
 
 			const staticFilePaths = [];
 
