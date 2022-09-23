@@ -10,10 +10,10 @@
 
 	{% endif %}
 
-	<link rel="stylesheet" href="{{ style_bundle | asset_url }}" type="text/css" as="style" />
+	{{ style_bundle | asset_url | stylesheet_tag }}
 
 {% endif %}
 
-<noscript><link rel="stylesheet" href="{{ 'no-js.css' | asset_url }}" as="style" /></noscript>
+<noscript>{{ 'no-js.css' | asset_url | stylesheet_tag }}</noscript>
 
 <style>#admin-bar-iframe { display: none !important; }</style>
