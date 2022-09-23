@@ -1,2 +1,2 @@
-import '../../../scss/theme.scss';
+import '../../layout/theme.js';
 import '../../../scss/templates/customers/login.scss';
