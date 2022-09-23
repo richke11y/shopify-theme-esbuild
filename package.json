@@ -15,7 +15,7 @@
     "esbuild": "node esbuild.js",
     "shopify:check": "shopify theme check --exclude-category html --auto-correct",
     "shopify:serve": "shopify theme serve",
-    "shopify:login": "shopify login --store https://MY-SHOPIFY-STORE-URL.myshopify.com/",
+    "shopify:login": "shopify login --store https://shpfy-theme-esbuild.myshopify.com/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
