@@ -11,7 +11,7 @@ let config = {
 
 	mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
 	entryPoints: entryPointPaths(projectRoot),
-	outputDir: './assets/',
+	outputDir: `${projectRoot}/assets/`,
 	minify: process.env.NODE_ENV === 'development' ? false : true,
 	sourcemap: process.env.NODE_ENV === 'development' ? true : false,
 	watch: process.env.NODE_ENV === 'development' ? true : false,
