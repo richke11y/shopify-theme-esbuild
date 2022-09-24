@@ -3,9 +3,7 @@ const path = require('path');
 
 const entryPointPaths = (root) => {
 
-	let entryPointsObj = {
-		// 'bundle.theme': `${root}/src/js/layout/theme.js`
-	};
+	let entryPointsObj = {};
 
 	const getAllFiles = (dirPath, arrayFilePaths) => {
 	
