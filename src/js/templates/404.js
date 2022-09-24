@@ -1,2 +1,2 @@
-import '../layout/theme.js';
+import '../theme.js';
 import '../../scss/templates/404.scss';
