@@ -2,9 +2,9 @@
   {
     "name": "theme_info",
     "theme_name": "Shopify Theme ESBuild",
-    "theme_version": "0.0.1",
+    "theme_version": "0.0.3",
     "theme_author": "Rich Kelly",
     "theme_support_email": "rich@richkelly.uk",
-    "theme_documentation_url": "https://github.com/tovestudio/tovestudio-shopify-theme.git"
+    "theme_documentation_url": "https://github.com/richke11y/shopify-theme-esbuild.git"
   }
 ]
