@@ -1,21 +1,31 @@
-{% if template %}
+{% liquid
+	if template
 
-	{% capture script_bundle %}
-	bundle.{{ template.name }}{% if template.suffix %}.{{ template.suffix }}{% endif %}.js
-	{% endcapture %}
+		if template contains 'page.modular'
 
-	{{ script_bundle | asset_url | preload_tag: as: 'script' }}
+			capture script_bundle
+				echo 'bundle.page.modular.js'
+			endcapture
 
-{% elsif request.path == '/challenge' %}
+		elsif request.path == '/challenge'
 
-	{{ 'bundle.challenge.js' | asset_url | preload_tag: as: 'script' }}
+			capture script_bundle
+				echo 'bundle.challenge.js'
+			endcapture
 
-{% else %}
+		else
 
-	{% unless checkout %}
+			capture script_bundle
+				echo 'bundle.' | append: template.name
+				if template.suffix
+					echo '.' | append: template.suffix
+				endif
+				echo '.js'
+			endcapture
 
-		{{ 'bundle.apps.js' | asset_url | preload_tag: as: 'script' }}
+		endif
 
-	{% endunless %}
-
-{% endif %}
+		echo script_bundle | asset_url | preload_tag: as: 'script'
+	
+	endif
+%}

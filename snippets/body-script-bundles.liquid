@@ -1,19 +1,31 @@
-{% if template %}
+{% liquid
+	if template 
 
-	{% capture script_bundle %}
-	bundle.{{ template.name }}{% if template.suffix %}.{{ template.suffix }}{% endif %}.js
-	{% endcapture %}
+		if template contains 'page.modular'
 
-	<script src="{{ script_bundle | asset_url }}" type="text/javascript" defer></script>
+			capture script_bundle
+				echo 'bundle.page.modular.js'
+			endcapture
 
-{% elsif request.path == '/challenge' %}
+		elsif request.path == '/challenge'
 
-	<script src="{{ 'bundle.challenge.js' | asset_url }}" type="text/javascript" defer></script>
+			capture script_bundle
+				echo 'bundle.challenge.js'
+			endcapture
 
-{% else %}
+		else
 
-	{% unless checkout %}
-		<script src="{{ 'bundle.apps.js' | asset_url }}" type="text/javascript" defer></script>
-	{% endunless %}
+			capture script_bundle
+				echo 'bundle.' | append: template.name
+				if template.suffix
+					echo '.' | append: template.suffix
+				endif
+				echo '.js'
+			endcapture
 
-{% endif %}
+		endif
+
+		echo script_bundle | asset_url | prepend: '<script type="text/javascript" src="' | append: '" defer></script>'
+
+	endif
+%}
