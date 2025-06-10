@@ -7,7 +7,7 @@ const copyStaticFile = (outputFileDir, filePath) => {
 
 		if (err) throw err;
 
-		console.log(`Copied: ${filePath} >>> ${outputFilePath(outputFileDir, filePath)}`);
+		// console.log(`Copied: ${filePath} >>> ${outputFilePath(outputFileDir, filePath)}`);
 
 	});
 
