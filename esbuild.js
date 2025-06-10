@@ -21,7 +21,7 @@ let config = {
 		`${projectRoot}/src/css/`,
 		`${projectRoot}/src/fonts/`,
 		`${projectRoot}/src/img/`,
-		`${projectRoot}/src/svg/`,
+		// `${projectRoot}/src/svg/`,
 	]
 
 }
