@@ -1,55 +1,59 @@
 {% liquid
-	assign shopName = shop.name | strip_html | escape
-	assign shopUrl = shop.url
-	assign shopLocale = shop.locale
-	assign shopCurrency = shop.currency
-	assign shopDescription = ''
-	if shopDescription == blank
-		assign shopDescription = shop.description | strip_html | escape
+	assign shop_name = shop.name | strip_html | escape
+	assign shop_url = shop.url
+	assign shop_locale = shop.locale
+	assign shop_currency = shop.currency
+	assign shop_description = ''
+	if shop_description == blank
+		assign shop_description = shop.description | strip_html | escape
 	endif
-	assign shopLogo = 'socialShareImg.jpg' | asset_img_url: 'master'
-	assign pageImage = page_image | image_url: width: 500
+	assign shop_logo = 'structured-data.jpg' | asset_img_url: 'master'
+	assign page_image = page_image | image_url: width: 500
+
+	assign instagram = 'https://www.instagram.com'
+	assign facebook = 'https://www.facebook.com'
+	assign linkedin = 'https://www.linkedin.com'
 
 	case template
-	when 'collection'
-		assign collectionTitle = collection.title | strip_html | escape
-		assign collectionDescription = collection.description | strip_html | escape
-		if collectionDescription == blank
-			assign collectionDescription = shopDescription
-		endif
-		assign collectionImage = collection.image
-		assign collectionUrl = shopUrl | append: collection.url
+		when 'collection'
+			assign collection_title = collection.title | strip_html | escape
+			assign collection_description = collection.description | strip_html | escape
+			if collection_description == blank
+				assign collection_description = shop_description
+			endif
+			assign collection_image = collection.image
+			assign collection_url = shop_url | append: collection.url
 
-	when 'product'
-		assign productID = product.id
-		assign productUrl = shopUrl | append: product.selected_or_first_available_variant.url
-		assign productTitle = product.title | strip_html | escape
-		assign productDescription = product.description | strip_html | escape
-		assign productVendor = product.vendor | strip_html | escape
-		assign productPrice = product.selected_or_first_available_variant.price | divided_by: 100.0
-		assign productImage = product.featured_image.src | image_url: width: 700, height: 700, crop: 'center', format: 'jpg'
-		assign productSKU = product.variants.first.sku
-		if productSKU == blank
-			assign productSKU = product.variants.first.id
-		endif
-		assign productAvailability = 'http://schema.org/InStock'
-		if product.available == false
-			assign productAvailability = 'http://schema.org/NotInStock'
-		endif
+		when 'product'
+			assign productid = product.id
+			assign product_url = shop_url | append: product.selected_or_first_available_variant.url
+			assign product_title = product.title | strip_html | escape
+			assign product_description = product.description | strip_html | escape
+			assign product_vendor = product.vendor | strip_html | escape
+			assign product_price = product.selected_or_first_available_variant.price | divided_by: 100.0
+			assign product_image = product.featured_image.src | image_url: width: 500, height: 500, crop: 'center', format: 'jpg'
+			assign product_sku = product.variants.first.sku
+			if product_sku == blank
+				assign product_sku = product.variants.first.id
+			endif
+			assign product_availability = 'http://schema.org/InStock'
+			if product.available == false
+				assign product_availability = 'http://schema.org/NotInStock'
+			endif
 
-	when 'blog'
-		assign blogTitle = blog.title | strip_html | escape
-		assign blogURL = shopUrl | append: blog.url
-	
-	when 'article'
-		assign articleTitle = article.title | strip_html | escape
-		assign articleURL = article.url
-		assign articleExcerpt = article.excerpt | strip_html | escape
-		assign articleImage = article.image | image_url: width: 700, height: 700, crop: 'center', format: 'jpg'
-		assign articlePublished = article.published_at
-		assign articleUpdated = article.updated_at
-		assign articleCreated = article.created_at
-		assign articleContent = article.content | strip_html | escape
+		when 'blog'
+			assign blog_title = blog.title | strip_html | escape
+			assign blog_url = shop_url | append: blog.url
+		
+		when 'article'
+			assign article_title = article.title | strip_html | escape
+			assign article_url = article.url
+			assign article_excerpt = article.excerpt | strip_html | escape
+			assign article_image = article.image | image_url: width: 500, height: 500, crop: 'center', format: 'jpg'
+			assign article_published = article.published_at
+			assign article_updated = article.updated_at
+			assign article_created = article.created_at
+			assign article_content = article.content | strip_html | escape
 
 	endcase
 %}
@@ -58,63 +62,63 @@
 	[{
 		"@context": "https://schema.org",
 		"@type": "WebSite",
-		"name": "{{ shopName }}",
-		"description": "{{ shopDescription }}",
-		"url": "{{ shopUrl }}",
-		"inLanguage": "{{ shopLocale }}",
+		"name": "{{ shop_name }}",
+		"description": "{{ shop_description }}",
+		"url": "{{ shop_url }}",
+		"inLanguage": "{{ shop_locale }}",
 		"sameAs": [
-			"https://www.instagram.com",
-			"https://www.facebook.com",
-			"https://www.pinterest.co.uk"
+			"{{ instagram }}",
+			"{{ facebook }}",
+			"{{ linkedin }}"
 		]
 	},
 	{
 		"@context": "https://schema.org",
 		"@type": "LocalBusiness",
-		"name": "{{ shopName }}",
-		"description": "{{ shopDescription }}",
-		"url": "{{ shopUrl }}",
-		"logo": "{{ shopLogo }}",
+		"name": "{{ shop_name }}",
+		"description": "{{ shop_description }}",
+		"url": "{{ shop_url }}",
+		"logo": "{{ shop_logo }}",
 		"image": {
 			"@type": "ImageObject",
-			"url": "{{ pageImage }}",
+			"url": "{{ page_image }}",
 			"width": "700",
 			"height": "700"
 		},
 		"sameAs": [
-			"https://www.instagram.com",
-			"https://www.facebook.com",
-			"https://www.pinterest.co.uk"
+			"{{ instagram }}",
+			"{{ facebook }}",
+			"{{ linkedin }}"
 		]
 	}{% case template %}
 	{% when 'collection' %},
 	{
 		"@context" : "http://schema.org",
 		"@type": "CollectionPage",
-		"name": "{{ collectionTitle }}",
-		"description": "{{ collectionDescription }}",
+		"name": "{{ collection_title }}",
+		"description": "{{ collection_description }}",
 		{% liquid 
-			if collectionImage
-				echo '"image": "' | prepend: collectionImage | append: '",'
+			if collection_image
+				echo '"image": "' | prepend: collection_image | append: '",'
 			else
-				echo '"image": "' | prepend: pageImage | append: '",'
+				echo '"image": "' | prepend: page_image | append: '",'
 			endif
 		%}
-		"url": "{{ collectionUrl }}"
+		"url": "{{ collection_url }}"
 	}{% if collection.products.size > 0 %},
 	{
 		"@context" : "http://schema.org",
 		"@type": "BreadcrumbList",
 		"mainEntityOfPage": {
 			"@type": "CollectionPage",
-			"@id": "{{ collectionUrl }}"
+			"@id": "{{ collection_url }}"
 		},
 		{% liquid
-			paginate collection.products by 50
+			paginate collection.products by 48
 				for product in collection.products
 					assign index = forloop.index
-					assign productTitle = product.title | strip_html | escape
-					assign url = shopUrl | append: product.url
+					assign product_title = product.title | strip_html | escape
+					assign url = shop_url | append: product.url
 					if forloop.first == true
 						echo '"itemListElement": [{'
 					else
@@ -122,7 +126,7 @@
 					endif
 						echo '"@type": "ListItem",'
 						echo '"position": "' | append: index | append: '",'
-						echo '"name": "' | append: productTitle | append: '",'
+						echo '"name": "' | append: product_title | append: '",'
 						echo '"item": "' | append: url | append: '",'
 						echo '"url": "' | append: url | append: '"'
 					if forloop.last == true
@@ -138,36 +142,36 @@
 	{
 		"@context": "http://schema.org/",
 		"@type": "Product",
-		"@id": "{{ productUrl }}",
-		"name": "{{ productTitle }}",
-		"url": "{{ productUrl }}",
-		"sku": "{{ productSKU }}",
-		"description": "{{ productDescription }}",
-		"image": "{{ productImage }}",
+		"@id": "{{ product_url }}",
+		"name": "{{ product_title }}",
+		"url": "{{ product_url }}",
+		"sku": "{{ product_sku }}",
+		"description": "{{ product_description }}",
+		"image": "{{ product_image }}",
 		"brand": {
 			"@type": "Brand",
-			"name": "{{ productVendor }}"
+			"name": "{{ product_vendor }}"
 		}{% if product.variants %},
 		"offers": {
 			"@type": "Offer",
-			"priceCurrency": "{{ shopCurrency }}",
-			"price": "{{ productPrice }}",
-			"itemCondition": "http://schema.org/NewCondition",
-			"availability": "{{ productAvailability }}",
-			"url": "{{ productUrl }}"
+			"priceCurrency": "{{ shop_currency }}",
+			"price": "{{ product_price }}",
+			"itemCondition": "ht_ip://schema.org/NewCondition",
+			"availability": "{{ product_availability }}",
+			"url": "{{ product_url }}"
 		}{% if product.variants.size > 1 %},
 		"additionalProperty": [{
 			"@type": "PropertyValue",
 			"propertyID": "item_group_id",
-			"value": "{{ productID }}"
+			"value": "{{ productid }}"
 		}]{% endif %}{% endif %}
 	}
 	{% when 'blog' %},
 	{
 		"@context": "http://schema.org",
 		"@type": "Blog",
-		"name": "{{ blogTitle }}",
-		"url": "{{ blogURL }}",
+		"name": "{{ blog_title }}",
+		"url": "{{ blog_url }}",
 		"blogPosts": [
 			{% paginate blog.articles by 50 %}
 			{% for article in blog.articles %}
@@ -175,22 +179,22 @@
 				"@context": "http://schema.org",
 				"@type": "BlogPosting",
 				"headline": "{{ article.title | strip_html | escape }}",
-				"mainEntityOfPage": "{{ blogURL | append: article.url }}",
+				"mainEntityOfPage": "{{ article.url }}",
 				"image": {
 					"@type": "ImageObject",
-					"url": "{{ article.image | image_url: width: 700, height: 700, crop: 'center', format: 'jpg' }}",
-					"width": 700,
-					"height": 700
+					"url": "{{ article.image | image_url: width: 500, height: 500, crop: 'center', format: 'jpg' }}",
+					"width": 500,
+					"height": 500
 				},
-				"url": "{{ blogURL | append: article.url }}",
+				"url": "{{ article.url }}",
 				"datePublished": "{{ article.published_at }}",
 				"dateModified": "{{ article.updated_at }}",
 				"dateCreated": "{{ article.created_at }}",
-				"description": "{% if article.excerpt.size > 0 %}{{ article.excerpt | strip_html | escape | truncatewords: 35 }}{% else %}{{ article.content | strip_html | escape | truncatewords: 35 }}{% endif %}",
+				"description": "{{ article.excerpt_or_content | truncatewords: 25 | strip_html }}",
 				"author": {
 					"@type": "Person",
-					"name": "{{ article.user.first_name }} {{ article.user.last_name }}",
-					"url": "{{ blogURL }}"
+					"name": "{{ shop_name }}",
+					"url": "{{ blog_url }}"
 				}
 			}{% unless forloop.last == true %},{% endunless %}
 			{% endfor %}
@@ -200,24 +204,24 @@
 	{
 		"@context" : "http://schema.org",
 		"@type": "Article",
-		{% if articleExcerpt.size > 0 %}"about": "{{ articleExcerpt }}",{% endif %}
-		"headline": "{{ articleTitle }}",
-		"mainEntityOfPage": "{{ articleURL }}",
+		{% if article_excerpt.size > 0 %}"about": "{{ article_excerpt }}",{% endif %}
+		"headline": "{{ article_title }}",
+		"mainEntityOfPage": "{{ article_url }}",
 		"image": {
 			"@type": "ImageObject",
-			"url": "{{ articleImage }}",
-			"width": "700",
-			"height": "700"
+			"url": "{{ article_image }}",
+			"width": "500",
+			"height": "500"
 		},
-		"url": "{{ articleURL }}",
-		"datePublished": "{{ articlePublished }}",
-		"dateModified": "{{ articleUpdated }}",
-		"dateCreated": "{{ articleCreated }}",
-		"articleBody": "{{ articleContent }}",
+		"url": "{{ article_url }}",
+		"datePublished": "{{ article_published }}",
+		"dateModified": "{{ article_updated }}",
+		"dateCreated": "{{ article_created }}",
+		"articleBody": "{{ article_content }}",
 		"author": {
 			"@type": "Person",
-			"name": "{{ shopName }}",
-			"url": "{{ articleURL }}"
+			"name": "{{ shop_name }}",
+			"url": "{{ article_url }}"
 		}
 	}{% endcase %}]
 </script>
