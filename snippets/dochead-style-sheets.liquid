@@ -1,18 +1,54 @@
-{% if template %}
+{% liquid
+	if template contains 'list-collections'
 
-	{% if request.path == '/challenge' %}
+		capture style_bundle
+			echo 'bundle.list-collections.css'
+		endcapture
 
-		{% capture style_bundle %}bundle.challenge.css{% endcapture %}
+	elsif template contains 'collection'
 
-	{% else %}
+		capture style_bundle
+			echo 'bundle.collection.css'
+		endcapture
 
-		{% capture style_bundle %}bundle.{{ template.name }}{% if template.suffix %}.{{ template.suffix }}{% endif %}.css{% endcapture %}
+	elsif template contains 'product'
 
-	{% endif %}
+		capture style_bundle
+			echo 'bundle.product.css'
+		endcapture
 
-	{{ style_bundle | asset_url | stylesheet_tag }}
+	elsif template contains 'article'
 
-{% endif %}
+		capture style_bundle
+			echo 'bundle.article.css'
+		endcapture
+
+	elsif template contains 'page'
+
+		capture style_bundle
+			echo 'bundle.page.css'
+		endcapture
+
+	elsif request.path == '/challenge'
+
+		capture style_bundle
+			echo 'bundle.challenge.css'
+		endcapture
+
+	else
+
+		capture style_bundle
+			echo 'bundle.' | append: template.name
+			if template.suffix
+				echo '.' | append: template.suffix
+			endif
+			echo '.css'
+		endcapture
+
+	endif
+%}
+
+{{ style_bundle | asset_url | stylesheet_tag }}
 
 <noscript>{{ 'no-js.css' | asset_url | stylesheet_tag }}</noscript>
 

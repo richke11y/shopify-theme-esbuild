@@ -1,10 +1,34 @@
 {% liquid
 	if template 
 
-		if template contains 'page.modular'
+		if template contains 'list-collections'
 
 			capture script_bundle
-				echo 'bundle.page.modular.js'
+				echo 'bundle.list-collections.js'
+			endcapture
+
+		elsif template contains 'collection'
+
+			capture script_bundle
+				echo 'bundle.collection.js'
+			endcapture
+
+		elsif template contains 'product'
+
+			capture script_bundle
+				echo 'bundle.product.js'
+			endcapture
+
+		elsif template contains 'article'
+
+			capture script_bundle
+				echo 'bundle.article.js'
+			endcapture
+
+		elsif template contains 'page'
+
+			capture script_bundle
+				echo 'bundle.page.js'
 			endcapture
 
 		elsif request.path == '/challenge'
@@ -25,7 +49,7 @@
 
 		endif
 
-		echo script_bundle | asset_url | prepend: '<script type="text/javascript" src="' | append: '" defer></script>'
-
 	endif
 %}
+
+<script type="text/javascript" src="{{ script_bundle | asset_url }}" defer></script>

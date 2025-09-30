@@ -8,8 +8,8 @@
 
 		<!-- * * * * * * * * * * * * * * * * * * 
 		Name: shopify-theme-esbuild
-		Version: 0.0.3
-		Date: 10/06/2025
+		Version: 0.0.4
+		Date: 30/09/2025
 		Web & Shopify Development: Rich Kelly <rich@richkelly.uk> (http://richkelly.uk)
 		* * * * * * * * * * * * * * * * * * * * -->
 
@@ -49,23 +49,34 @@
 
 		{{ content_for_header }}
 
+		{% unless shop.domain == 'eagleandhodges.com' %}
+		<style>#shopify-pc__banner { display: none !important; }</style>
+		{% endunless %}
+
 	</head>
 
 	<body>
 
-		{% liquid
-			echo '<main class="main">'
+		{% render 'header' %}
+
+		<main class="main">
+
+			{% liquid
 				if request.path == '/challenge'
 					render 'challenge-container', content: content_for_layout
 				else
 					echo content_for_layout
 				endif
-			echo '</main>'
+			%}
 
+		</main>
+
+		{% liquid
+			render 'footer'
 			render 'body-script-bundles'
-
-			echo shop.money_format | json | prepend: '<script>Shopify.moneyformat = ' | append: ';</script>'
 		%}
+
+		<script>Shopify.moneyformat = "{{shop.money_format}}";</script>
 
 	</body>
 
