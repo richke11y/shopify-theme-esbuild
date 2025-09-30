@@ -1,5 +1,5 @@
-@import './_custom-properties.scss';
-@import './_font-face.scss';
-@import './_reset.scss';
-@import './_typography.scss';
-@import './_colour.scss';
+@use './_custom-properties.scss';
+@use './_font-face.scss';
+@use './_reset.scss';
+@use './_colour.scss';
+@use './_typography.scss';
