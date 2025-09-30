@@ -1,0 +1,13 @@
+@function minWidth($width) {
+
+	@return 'min-width: ' + $width;
+
+}
+
+@function maxWidth($width) {
+
+	$maxVal: calc($width - 1px);
+
+	@return 'max-width: ' + $maxVal;
+
+}
