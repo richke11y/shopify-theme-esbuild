@@ -1,14 +1,12 @@
-# SHOPIFY THEME ESBUILD
+# eaglehodges-shopify-theme
 
-A bare-bones, boilerplate Shopify Theme that couples the Shopify CLI with esbuild. Bundles and compiles SCSS/CSS and JS files and fires up a local development environment.
+### eagleandhodges.com
 
-Nothing fancy, a work in progress.
+Theme Name: eaglehodges-shopify-theme
 
-Shopify CLI
-https://shopify.dev/themes/tools/cli
+Theme Version: 0.0.1
 
-esbuild
-https://esbuild.github.io/
+Date: 30/09/2025
 
-Authored by Rich Kelly.
-Dec. 2022.
+Web Design & Creative Direction: Emmanuelle Goutal Studio (https://actionwolfmedia.com/)
+Web & Shopify Development: Rich Kelly (https://richkelly.uk)

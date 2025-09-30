@@ -1,20 +1,20 @@
 {
-  "name": "shopify-theme-esbuild",
-  "version": "0.0.3",
+  "name": "eaglehodges-shopify-theme",
+  "version": "0.0.1",
   "private": false,
-  "description": "A bare-bones, boilerplate Shopify Theme that couples the Shopify CLI with esbuild. Bundles and compiles SCSS/CSS and JS files and fires up a local development environment.",
+  "description": "",
   "author": "Rich Kelly <rich@richkelly.uk>",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/richke11y/shopify-theme-esbuild.git"
+    "url": "git+https://github.com/eaglehodges/eaglehodges-shopify-theme.git"
   },
   "scripts": {
     "start": "NODE_ENV=development run-p esbuild shopify:serve",
     "build": "NODE_ENV=production run-s esbuild shopify:check",
     "esbuild": "node esbuild.js",
     "shopify:check": "shopify theme check --auto-correct",
-    "shopify:serve": "shopify theme dev --store https://shpfy-theme-esbuild.myshopify.com/ --ignore *.map"
+    "shopify:serve": "shopify theme dev --store https://eagle-hodges-development.myshopify.com/ --ignore *.map"
   },
   "devDependencies": {
     "chokidar": "^3.5.3",
