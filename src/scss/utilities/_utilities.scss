@@ -1,3 +1,3 @@
-@import './_mixins.scss';
-@import './_breakpoints.scss';
-@import './_variables.scss';
+@use './_media-query-breakpoints.scss';
+@use './_functions.scss';
+@use './_mixins.scss';
