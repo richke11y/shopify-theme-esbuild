@@ -40,7 +40,8 @@ const entryPointPaths = (root) => {
 
 	const arrayFilePaths = getAllFiles([
 		`${root}/src/js/templates`,
-		`${root}/src/js/sections`
+		`${root}/src/js/sections`,
+		`${root}/src/js/web-components`
 	], []);
 
 	// const getAllFiles = (dirPath, arrayFilePaths) => {
