@@ -2,7 +2,7 @@
 
 A bare-bones, boilerplate Shopify Theme that couples the Shopify CLI with esbuild. Bundles and compiles SCSS/CSS and JS files and fires up a local development environment.
 
-Nothing fancy, a work in progress.
+Nothing fancy, a continual work in progress.
 
 Shopify CLI
 https://shopify.dev/themes/tools/cli
