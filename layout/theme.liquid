@@ -1,57 +1,80 @@
+{% liquid
+	assign is_production = false
+	assign google_site_verification = 'no0w4-EG73QmMV_6TFt3QGj8fA5-z8EiDASkpDkiuSg'
+	
+	assign shop_description = shop.description
+	assign shop_domain = shop.domain
+	assign shop_locale = shop.locale
+	assign shop_name = shop.name
+
+	assign title = page_title
+	assign description = page_description | default: shop_description | strip_html
+
+	unless title contains shop_name
+		assign title = title | append: ' - ' | append: shop_name
+	endunless
+
+	if shop_domain contains 'yourstoredomainhere.com'
+		assign is_production = true
+	endif
+%}
+
 <!doctype html>
 
 	<html class="no-js" lang="{{ request.locale.iso_code }}">
 
 	<head>
 
-		<meta charset="utf-8">
-
 		<!-- * * * * * * * * * * * * * * * * * * 
 		Name: shopify-theme-esbuild
-		Version: 0.0.4
-		Date: 30/09/2025
+		Version: 0.0.5
+		Date: 20/10/2026
 		Web & Shopify Development: Rich Kelly <rich@richkelly.uk> (http://richkelly.uk)
 		* * * * * * * * * * * * * * * * * * * * -->
 
-		<title>{% render 'dochead-meta-title' %}</title>
+		<meta charset="utf-8">
+
+		<title>{{ title }}</title>
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width">
-		<meta name="description" content="{{ page_description | strip_html }}" />
+		<meta name="description" content="{{ description }}">
 
-		<meta property="og:title" content="{% render 'dochead-meta-title' %}">
-		<meta property="og:description" content="{{ page_description | strip_html }}">
+		<meta property="og:title" content="{{ title }}">
+		<meta property="og:description" content="{{ description }}">
+		{% unless page_image == blank %}
 		<meta property="og:image" content="{{ page_image | image_url: width: 500 }}">
+		{% endunless %}
 		<meta property="og:url" content="{{ canonical_url }}">
-		<meta property="og:locale" content="{{ shop.locale }}" />
 		<meta property="og:type" content="website" />
-		<meta property="og:site_name" content="{{ shop.name }}" />
+		<meta property="og:site_name" content="{{ shop_name }}" />
+		<meta property="og:locale" content="{{ shop_locale }}" />
 
-		{% render 'dochead-google-structured-data' %}
+		{% if is_production and google_site_verification != blank %}
+		<meta name="google-site-verification" content="{{ google_site_verification }}" />
+		{% endif %}
 
 		<link rel="canonical" href="{{ canonical_url }}">
 		<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
-		<link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}" />
-		<link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}" />
-		<link rel="icon" type="image/png" sizes="512x512" href="{{ 'android-chrome-512x512.png' | asset_url }}" />
-		<link rel="icon" type="image/png" sizes="192x192" href="{{ 'android-chrome-192x192.png' | asset_url }}" />
-		<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{{ 'apple-touch-icon-180x180.png' | asset_url }}" />
-		<link rel="icon" type="image/png" sizes="180x180" href="{{ 'favicon.png' | asset_url }}" />
-		<link rel="shortcut icon" type="image/png" href="{{ 'favicon.ico' | asset_url }}" />
+		<link rel="shortcut icon" type="image/png" href="{{ 'favicon.ico' | asset_img_url }}" />
+		<link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}" />
+		<link rel="icon" type="image/png" sizes="512x512" href="{{ 'favicon-512x512.png' | asset_img_url: '512x512' }}" />
+		<link rel="icon" type="image/png" sizes="192x192" href="{{ 'favicon-192x192.png' | asset_img_url: '192x192' }}" />
+		<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{{ 'favicon-180x180.png' | asset_img_url: '180x180' }}" />
+		<link rel="icon" type="image/png" sizes="180x180" href="{{ 'favicon-180x180.png' | asset_img_url: '180x180' }}" />
+		<link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_img_url: '32x32' }}" />
+		<link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_img_url: '16x16' }}" />
 
 		<script>document.documentElement.classList.replace('no-js', 'js');</script>
 
 		{% liquid
+			render 'dochead-google-structured-data'
 			render 'dochead-script-preload'
 			render 'dochead-style-sheets'
 		%}
 
 		{{ content_for_header }}
-
-		{% unless shop.domain == 'eagleandhodges.com' %}
-		<style>#shopify-pc__banner { display: none !important; }</style>
-		{% endunless %}
 
 	</head>
 
@@ -63,7 +86,7 @@
 
 			{% liquid
 				if request.path == '/challenge'
-					render 'challenge-container', content: content_for_layout
+					render 'challenge-container', content_for_layout: content_for_layout
 				else
 					echo content_for_layout
 				endif
@@ -72,11 +95,16 @@
 		</main>
 
 		{% liquid
-			render 'footer'
+			section 'footer'
+
 			render 'body-script-bundles'
 		%}
 
-		<script>Shopify.moneyformat = "{{shop.money_format}}";</script>
+		{% if is_production %}
+		<script type="module" src="{{ 'bundle.cookie-consent-banner.js' | asset_url }}" defer></script>
+		{% endif %}
+
+		<script>Shopify.moneyformat = {{ shop.money_format | json }};</script>
 
 	</body>
 
