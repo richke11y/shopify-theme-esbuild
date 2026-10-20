@@ -1,0 +1,1 @@
+import '../../scss/sections/_footer.scss';

@@ -50,6 +50,8 @@
 		endif
 
 	endif
+
+	assign script_url = script_bundle | asset_url
 %}
 
-<script type="text/javascript" src="{{ script_bundle | asset_url }}" defer></script>
+<script type="text/javascript" src="{{ script_url }}" defer></script>

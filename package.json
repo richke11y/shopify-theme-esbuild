@@ -1,6 +1,6 @@
 {
-  "name": "eaglehodges-shopify-theme",
-  "version": "0.0.1",
+  "name": "shopify-theme-esbuild",
+  "version": "0.0.5",
   "private": false,
   "description": "",
   "author": "Rich Kelly <rich@richkelly.uk>",
@@ -17,12 +17,13 @@
     "shopify:serve": "shopify theme dev --store https://eagle-hodges-development.myshopify.com/ --ignore *.map"
   },
   "devDependencies": {
-    "chokidar": "^3.5.3",
-    "esbuild": "^0.15.6",
+    "chokidar": "^3.6.0",
+    "esbuild": "^0.16.17",
     "esbuild-plugin-sass": "^1.0.1",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
+    "@shopify/theme-cart": "^4.1.1",
     "@shopify/theme-currency": "^4.1.1",
     "@shopify/theme-product": "^4.1.1",
     "@shopify/theme-product-form": "^4.1.1",

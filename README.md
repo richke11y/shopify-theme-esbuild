@@ -1,12 +1,9 @@
-# eaglehodges-shopify-theme
+# shopify-theme-esbuild
 
-### eagleandhodges.com
+Nothing fancy, a continual work in progress.
 
-Theme Name: eaglehodges-shopify-theme
+Theme Version: 0.0.5
 
-Theme Version: 0.0.1
+Date: 20/10/2026
 
-Date: 30/09/2025
-
-Web Design & Creative Direction: Emmanuelle Goutal Studio (https://actionwolfmedia.com/)
 Web & Shopify Development: Rich Kelly (https://richkelly.uk)

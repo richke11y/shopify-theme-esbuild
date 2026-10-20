@@ -7,23 +7,21 @@ const watchStaticFiles = require('./build-utilities/plugins/watch-static-files.j
 
 const projectRoot = __dirname;
 
-let config = {
-
+const config = {
 	mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
 	entryPoints: entryPointPaths(projectRoot),
 	outputDir: `${projectRoot}/assets/`,
 	minify: process.env.NODE_ENV === 'development' ? false : true,
 	sourcemap: process.env.NODE_ENV === 'development' ? true : false,
 	watch: process.env.NODE_ENV === 'development' ? true : false,
-	legalComments: process.env.NODE_ENV === 'development' ? 'inline' : 'none',
+	legalComments: process.env.NODE_ENV === 'development' ? 'inline' : 'eof',
 	format: 'esm',
 	staticFileDirs: [
 		`${projectRoot}/src/css/`,
 		`${projectRoot}/src/fonts/`,
 		`${projectRoot}/src/img/`,
-		// `${projectRoot}/src/svg/`,
+		`${projectRoot}/src/svg/`
 	]
-
 }
 
 esbuild.build({

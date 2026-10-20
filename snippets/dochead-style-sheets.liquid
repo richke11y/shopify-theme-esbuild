@@ -46,10 +46,10 @@
 		endcapture
 
 	endif
+
+	assign style_url = style_bundle | asset_url
+
+	echo style_url | stylesheet_tag
 %}
 
-{{ style_bundle | asset_url | stylesheet_tag }}
-
-<noscript>{{ 'no-js.css' | asset_url | stylesheet_tag }}</noscript>
-
-<style>#admin-bar-iframe { display: none !important; }</style>
+{% comment %} <style>#admin-bar-iframe { display: none !important; }</style> {% endcomment %}

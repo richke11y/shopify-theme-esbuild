@@ -50,6 +50,8 @@
 		endif
 
 	endif
-%}
 
-{{ script_bundle | asset_url | preload_tag: as: 'script' }}
+	assign script_url = script_bundle | asset_url
+
+	echo script_url | preload_tag: as: 'script'
+%}

@@ -7,21 +7,7 @@
 */
 export function cartPOSTChange(line, quantity) {
 
-	// console.log('cartPOSTChange');
-
-	// if (typeof key !== 'string') {
-
-	// 	throw new TypeError('The provided key is not a String');
-
-	// }
-
-	if (typeof line !== 'number') {
-
-		throw new TypeError('The provided quantity is not a Number');
-
-	}
-
-	if (typeof quantity !== 'number') {
+	if (typeof quantity !== 'number' || typeof line !== 'number') {
 
 		throw new TypeError('The provided quantity is not a Number');
 
@@ -39,7 +25,64 @@ export function cartPOSTChange(line, quantity) {
 
 	}
 
-	const response = fetch(`${window.Shopify.routes.root}cart/change.js`, settings);
+	const url = `${window.Shopify.routes.root}cart/change.js`;
+
+	const response = fetch(url, settings);
+
+	return response;
+
+}
+
+export function cartPOSTChangeProperties(id, properties) {
+
+	if (typeof id !== 'number' || typeof id !== 'string') {
+
+		throw new TypeError('The provided quantity is not a Number');
+
+	}
+
+	if (typeof properties !== 'object') {
+
+		throw new TypeError('The provided parameter is not an Object');
+
+	}
+
+	const settings = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		body: JSON.stringify({
+			id: id,
+			properties: properties
+		})
+	}
+
+	const url = `${window.Shopify.routes.root}cart/change.js`;
+
+	const response = fetch(url, settings);
+
+	return response;
+
+}
+
+export function cartPOSTUpdate(jsonObject) {
+
+	if (typeof jsonObject !== 'object') {
+
+		throw new TypeError('The provided parameter is not an Object');
+
+	}
+
+	const settings = {
+
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json; charset=utf-8' },
+		body: JSON.stringify(jsonObject)
+
+	}
+
+	const url = `${window.Shopify.routes.root}cart/update.js`;
+
+	const response = fetch(url, settings);
 
 	return response;
 
@@ -52,11 +95,11 @@ export function cartPOSTChange(line, quantity) {
 */
 export async function cartGETState() {
 
-	// console.log('cartGETState');
+	const url = `${window.Shopify.routes.root}cart.js`;
 
-	const response = await fetch(`${window.Shopify.routes.root}cart.js`);
+	const response = await fetch(url);
 
-	if (response.status === 200) {
+	if (response.ok) {
 
 		const cart = await response.json();
 
@@ -69,35 +112,27 @@ export async function cartGETState() {
 }
 
 /**
- * Sends a POST request to Shopify Cart API, with data object regarding the Cart Item to add.
+ * Sends a POST request to Shopify Cart API, with FormData object regarding the Cart Item to add.
  * @function cartPOSTAdd
 */
-export async function cartPOSTAdd(data) {
+export async function cartPOSTAdd(formDataObject, jsonObject) {
 
-	// console.log('cartPOSTAdd');
-
-	const settings = {
-		method: 'POST',
-		body: data
-		// headers: { 'Content-Type': 'application/json; charset=utf-8' },
-		// body: JSON.stringify(data)
+	let settings = {
+		method: 'POST'
 	}
 
-	const response = await fetch(`${window.Shopify.routes.root}cart/add.js`, settings)
+	if (formDataObject) settings.body = formDataObject;
 
-	// console.log(response);
-	// console.log(response.status);
+	if (jsonObject) {
+		
+		settings.headers = { 'Content-Type': 'application/json; charset=utf-8' };
+		settings.body = JSON.stringify(jsonObject);
+	
+	}
 
-	// if (response.status === 200) {
+	const url = `${window.Shopify.routes.root}cart/add.js`
 
-	// 	return response.json();
-
-	// } else if (response.status === 422) {
-
-	// 	// console.log(response.description);
-	// 	return response.json();
-
-	// }
+	const response = await fetch(url, settings)
 
 	return response;
 
