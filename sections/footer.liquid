@@ -1,0 +1,16 @@
+{% liquid
+	echo 'bundle.footer.css' | asset_url | stylesheet_tag
+%}
+
+Footer Section
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% schema %}
+{
+	"name": "Footer",
+	"tag": "footer",
+	"class": "footer"
+}
+{% endschema %}

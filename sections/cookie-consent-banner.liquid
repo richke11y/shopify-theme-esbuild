@@ -1,0 +1,62 @@
+<cookie-consent-banner>
+
+	{% echo 'bundle.cookie-consent-banner.css' | asset_url | stylesheet_tag %}
+
+	<div id="cookie-consent-modal" class="cookie-consent-modal">
+
+		<h3 class="title title--no-margin-top">Your Privacy</h3>
+
+		<p>The Cut London uses cookies for analytics, personalisation and ensure you get the best user experience.</p>
+
+		<p>Read our <a href="/pages/terms-conditions-privacy-policy" class="link link--style-underline" title="Privacy Policy">Privacy Policy</a> to learn more.</p>
+
+		<form class="consent-options">
+			<ul class="consent-options__ul">
+				<li class="consent-options__li">
+					<label class="consent-option">
+						<input id="consent-necessary" class="checkbox" type="checkbox" value="Necessary" checked disabled>
+						<span>Necessary</span>
+					</label>
+				</li>
+
+				<li class="consent-options__li">
+					<label class="consent-option">
+						<input id="consent-analytics" class="checkbox" type="checkbox" value="Analytics" checked>
+						<span>Analytics</span>
+					</label>
+				</li>
+
+				<li class="consent-options__li">
+					<label class="consent-option">
+						<input id="consent-preferences" class="checkbox" type="checkbox" value="Preferences" checked>
+						<span>Preferences</span>
+					</label>
+				</li>
+
+				<li class="consent-options__li">
+					<label class="consent-option">
+						<input id="consent-marketing" class="checkbox" type="checkbox" value="Marketing" checked>
+						<span>Marketing</span>
+					</label>
+				</li>
+
+				<li class="consent-options__li">
+					<label class="consent-option">
+						<input id="consent-sale" class="checkbox" type="checkbox" value="Sale of Data">
+						<span>Sale of Data</span>
+					</label>
+				</li>
+			</ul>
+		</form>
+
+		<div class="consent-buttons">
+
+			<button id="btn-accept" class="btn-accept button button--black" aria-label="Accept">Accept</button>
+
+			<button id="btn-manage" class="btn-manage button button--block" aria-label="Manage Cookies">Manage Cookies</button>
+		
+		</div>
+	
+	</div>
+
+</cookie-consent-banner>
