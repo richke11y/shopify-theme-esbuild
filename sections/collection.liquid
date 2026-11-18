@@ -1,1 +1,16 @@
-<h1>{{ collection.title }}</h1>
+{% liquid
+	assign collection_title = collection.title
+%}
+
+<div class="collection">
+
+	<h1>{{ collection_title }}</h1>
+
+</div>
+
+{% schema %}
+{
+	"name": "Collection",
+	"tag": "section"
+}
+{% endschema %}
