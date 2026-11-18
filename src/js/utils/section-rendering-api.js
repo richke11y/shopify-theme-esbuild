@@ -3,11 +3,6 @@ export async function renderSectionAPI(sectionId, path) {
 
 	if (sectionId === '') return;
 
-	// let locationPath = path;
-	// let sectionRequestString = `?section_id=${sectionId}`;
-
-	// if (locationPath === undefined) locationPath = window.Shopify.routes.root
-
 	const locationPath = path === undefined ? window.Shopify.routes.root : path;
 
 	let sectionRequestString = `?section_id=${sectionId}`;
