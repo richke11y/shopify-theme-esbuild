@@ -47,9 +47,5 @@
 
 	endif
 
-	assign style_url = style_bundle | asset_url
-
-	echo style_url | stylesheet_tag
+	echo style_bundle | asset_url | stylesheet_tag
 %}
-
-{% comment %} <style>#admin-bar-iframe { display: none !important; }</style> {% endcomment %}
