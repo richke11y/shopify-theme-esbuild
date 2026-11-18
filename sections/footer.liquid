@@ -2,7 +2,13 @@
 	echo 'bundle.footer.css' | asset_url | stylesheet_tag
 %}
 
-Footer Section
+<div class="footer__container">
+
+	Footer Section
+
+	<p>&copy; {{ 'now' | date: '%Y' }} Store Name Here</p>
+
+</div>
 
 {% stylesheet %}
 {% endstylesheet %}
