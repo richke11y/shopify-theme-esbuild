@@ -9,12 +9,17 @@
  */
  {
 	"sections": {
-		"main": {
+		"product": {
 			"type": "product",
+			"settings": {}
+		},
+		"product_recommends": {
+			"type": "product-recommends",
 			"settings": {}
 		}
 	},
 	"order": [
-		"main"
+		"product",
+		"product_recommends"
 	]
 }
