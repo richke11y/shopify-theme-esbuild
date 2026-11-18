@@ -1,0 +1,33 @@
+<header-localisation>
+
+	{% form 'localization' %}
+
+		<div class="custom-select-container localization">
+	
+			<input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+	
+			<div id="country-select" class="custom-select">
+	
+				<div class="custom-select__value">{{ localization.country.iso_code }} ({{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }})</div>
+	
+			</div>
+	
+			<select name="country" aria-label="Localization">
+	
+				{% for country in localization.available_countries %}
+	
+					{% if country.iso_code == localization.country.iso_code %}
+					<option value="{{ country.iso_code }}" selected="true">{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</option>
+					{% else %}
+					<option value="{{ country.iso_code }}">{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</option>
+					{% endif %}
+	
+				{% endfor %}
+	
+			</select>
+	
+		</div>
+	
+	{% endform %}
+
+</header-localisation>

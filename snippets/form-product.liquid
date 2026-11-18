@@ -1,0 +1,86 @@
+{% liquid
+	assign product_handle = product.handle
+	assign product_id = product.id
+	assign product_title = product.title
+	assign product_variants = product.variants
+	assign current_variant = product.selected_or_first_available_variant
+	assign product_only_default_variant = product.has_only_default_variant
+	assign product_options_with_values = product.options_with_values
+%}
+
+<product-form>
+
+	{% form 'product', product, id: 'product-form', class: 'product-form', data-product-handle: product_handle %}
+		
+		<input type="hidden" name="name" value="{{ product_title }}" />
+		<input type="hidden" name="quantity" value="1" min="1" max="1" />
+
+		{% if product_only_default_variant %}
+		<input type="hidden" name="id" value="{{ product_variants.first.id }}" />
+		{% else %}
+		<input type="hidden" name="id" value="{{ current_variant.id }}" />
+		{% endif %}
+
+		<div class="product-form__options">
+
+			<div class="options">
+
+				<ul class="options__list">
+
+					{% for option in product_options_with_values %}
+					{% liquid
+						assign option_id = option.name | handleize
+						assign option_position = option.position
+						assign option_name = option.name | escape
+						assign option_selected = option.selected_value
+					%}
+					<li class="options__item ">
+
+						<product-option id="{{ product_id }}_{{ option_id }}" data-option-position="{{ option_position }}">
+
+							<div class="product-option__label">
+
+								<label class="option-label" for="{{ option_id }}">{{ option_name }}</label>
+
+							</div>
+
+							<div class="product-option__variants">
+
+								<div id="{{ option_id }}" class="variants">
+
+									<select id="Option{{ option_position }}" class="option-variant__input" name="options[{{ option_name }}]" aria-hidden="true" >
+
+										{% for value in option.values %}
+										{% liquid
+											assign available = value.available
+											assign selected = false
+
+											if option_selected == value
+												assign selected = true
+											endif
+										%}
+										<option value="{{ value | escape }}" {% if selected %}selected="selected"{% endif %} data-available="{{ available }}">{{ value }}</option>
+										{% endfor %}
+
+									</select>
+
+								</div>
+
+							</div>
+
+						</product-option>
+
+					</li>
+					{% endfor %}
+
+				</ul>
+
+			</div>
+
+		</div>
+
+		<input id="add-to-cart" class="button" type="submit" aria-label="Add to Cart" value="Add to Cart" />
+
+	{% endform %}
+
+</product-form>

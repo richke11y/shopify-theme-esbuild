@@ -1,0 +1,25 @@
+{% liquid
+	assign banner_message = section.settings.banner_message
+%}
+
+<div class="header__notification">
+
+	<notification-banner>
+
+		{% liquid
+			unless banner_message == blank
+				echo banner_message
+			endunless
+		%}
+
+	</notification-banner>
+
+</div>
+
+{% stylesheet %}
+
+notification-banner {
+	display: block;
+}
+
+{% endstylesheet %}

@@ -1,0 +1,48 @@
+{% liquid 
+	assign products_count = 0
+	assign filters = ''
+	assign sort_by = ''
+	assign sort_options = ''
+
+	assign active_filters = 0
+	assign filters_applied = false
+	assign filter_price_range = false
+
+	if template contains 'collection'
+
+		assign products_count = collection.products_count 
+		assign filters = collection.filters
+		assign sort_by = collection.sort_by | default: collection.default_sort_by
+		assign sort_options = collection.sort_options
+
+	elsif template contains 'search'
+
+		assign products_count = search.results_count
+		assign filters = search.filters
+		assign sort_by = search.sort_by | default: search.default_sort_by
+		assign sort_options = search.sort_options
+
+	endif
+
+	for filter in filters
+		if filter.active_values.size > 0
+			assign active_filters = active_filters | plus: filter.active_values.size
+			assign filters_applied = true
+		endif
+		if filter.type == 'price_range'
+			if filter.min_value.value > 0 or filter.max_value.value < filter.range_max
+				assign filter_price_range = true
+			endif
+		endif
+	endfor
+
+	echo 'bundle.draw-collection-filter-sort.css' | asset_url | stylesheet_tag
+%}
+
+<script type="module" src="{{ 'bundle.draw-collection-filter-sort.js' | asset_url }}" defer></script>
+
+<draw-filter-sort>
+
+	<div class="draw" data-draw-element="draw-filter-sort"></div>
+
+</draw-filter-sort>

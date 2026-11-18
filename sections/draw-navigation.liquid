@@ -1,0 +1,17 @@
+{% liquid
+	assign menu = settings.main_menu
+	assign menu_links = menu.links
+	assign menu_title = menu.title
+
+	assign section_blocks = section.blocks
+%}
+
+{% if menu_links.size > 0 %}
+<draw-navigation aria-label="{{ menu_title }}"></draw-navigation>
+{% endif %}
+
+{% schema %}
+{
+	"name": "Website Navigation"
+}
+{% endschema %}

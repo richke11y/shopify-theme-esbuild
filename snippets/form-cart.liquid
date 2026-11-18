@@ -1,0 +1,30 @@
+{% liquid
+	assign cart_currency_symbol = cart.currency.symbol
+	assign cart_items = cart.items
+	assign cart_note = cart.note
+	assign cart_total_price = cart.total_price | money_without_trailing_zeros
+%}
+
+<cart-form>
+
+	<form class="form-cart" action="{{ routes.cart_url }}" method="post" novalidate>
+
+		<div class="cart-items cart-section">
+
+			<ul class="cart-items__list">
+
+				{% liquid
+					for item in cart_items
+						render 'cart-item', item: item, index: forloop.index, class: 'cart-item'
+					endfor	
+				%}
+
+			</ul>
+
+		</div>
+
+		<input id="checkout-bttn" class="button" type="submit" name="checkout" value="Checkout">
+
+	</form>
+
+</cart-form>

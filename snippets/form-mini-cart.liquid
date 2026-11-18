@@ -1,0 +1,21 @@
+<form-mini-cart class="form-mini-cart" action="/checkout" method="post" novalidate>
+
+	<div class="mini-cart-items">
+
+		<ul class="mini-cart-items__ul">
+
+			{% liquid
+				for item in cart.items
+					render 'cart-item', item: item, index: forloop.index, class: 'mini-item'
+				endfor
+			%}
+
+		</ul>
+
+	</div>
+
+	<button id="mini-checkout-button" class="button" aria-label="Checkout Now" type="button">Checkout Now</button>
+
+	<button id="mini-cart-button" class="button" aria-label="View My Cart" type="button">View My Cart</button>
+
+</form-mini-cart>

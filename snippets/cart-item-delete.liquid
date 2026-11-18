@@ -1,0 +1,7 @@
+{% assign url_to_remove = item.url_to_remove %}
+
+<item-delete data-cart-item-index="{{ index }}" data-cart-key="{{ item.key }}">
+	
+	<a class="item-delete" href="{{ url_to_remove }}" title="Remove">Remove</a>
+
+</item-delete>

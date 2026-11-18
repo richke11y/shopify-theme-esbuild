@@ -1,0 +1,103 @@
+{% liquid
+	assign shop_name = shop.name
+
+	assign product_title = product.title
+	assign product_url = product.url | within: collection
+	assign product_available = product.available
+
+	assign product_price = product.price | money_without_trailing_zeros
+	assign product_compare_price = product.compare_at_price | money_without_trailing_zeros
+	assign product_price_varies = product.price_varies
+	assign product_price_min = product.price_min | money_without_trailing_zeros
+	assign product_price_max = product.price_max | money_without_trailing_zeros
+
+	assign product_images = product.images
+
+	assign fetchpriority = 'low'
+	assign loading = 'lazy'
+
+	unless lazyload == true
+		assign fetchpriority = 'high'
+		assign loading = 'eager'
+	endunless
+%}
+
+<product-card>
+
+	<a class="product-card__link" href="{{ product_url }}" title="{{ product_title }}">
+
+		<div class="product-card__image">
+
+			<div class="card-images">
+
+				{% for image in product_images limit: 2 %}
+				<div class="product-image">
+
+					<img class="img img--object-fit"
+						srcset="{{ image | image_url: width: 400, height: 400, crop: 'center', format: 'jpg' }} 400w,
+								{{ image | image_url: width: 500, height: 600, crop: 'center', format: 'jpg' }} 500w,
+								{{ image | image_url: width: 600, height: 600, crop: 'center', format: 'jpg' }} 600w"
+						sizes="(max-width: 400px) 400px,
+								(max-width: 500px) 500px, 600px" 
+						src="{{ image | image_url: width: 600, height: 600, crop: 'center', format: 'webp' }}" 
+						alt="{% unless image.alt == blank %}{{ image.alt }}{% else %}{{ product_title }} - {{ shop_name }}{% endunless %}"
+						width="600" 
+						height="600" 
+						fetchpriority="{{ fetchpriority }}" 
+						loading="{{ loading }}"
+					>
+					
+				</div>
+				{% endfor %}				
+
+			</div>
+
+		</div>
+
+		<h4 class="product-card-title title">{{ product_title }}</h4>
+
+		{% if product_available %}
+
+			{% if product_compare_price > product_price %}
+		
+				{% if product_price_varies %}
+		
+					<p class="product-card-price no-margin clr-grey-contrast">From {{ product_price_min }} - {{ product_price_max }}</p>
+		
+				{% else %}
+		
+					<p class="product-card-price no-margin clr-grey-contrast"><span class="compare-price clr-mid-grey">{{ product_compare_price }}</span> {{ product_price }}</p>
+
+				{% endif %}
+		
+			{% else %}
+
+				{% if product_price_varies %}
+
+					<p class="product-card-price no-margin clr-grey-contrast">From {{ product_price_min }} - {{ product_price_max }}</p>
+
+				{% else %}
+
+					<p class="product-card-price no-margin clr-grey-contrast">{{ product_price }}</p>
+
+				{% endif %}
+
+			{% endif %}
+		
+		{% else %}
+		
+			<p class="product-card-price no-margin">Sold Out</p>
+		
+		{% endif %}
+
+	</a>
+
+</product-card>
+
+{% stylesheet %}
+
+product-card {
+	display: block;
+}
+
+{% endstylesheet %}

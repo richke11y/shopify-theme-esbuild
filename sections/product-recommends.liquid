@@ -1,0 +1,51 @@
+{% comment %} https://shopify.dev/docs/api/ajax/reference/product-recommendations {% endcomment %}
+{% liquid
+	assign title = section.settings.title
+	assign product_id = product.id
+	assign section_id = section.id
+	assign return_limit = 6
+	assign use_product_recommends_api = true
+	assign recommended_products = product.metafields.product.recommended_products
+	assign products = ''
+
+	if recommended_products == blank
+		assign products = recommendations.products
+	else
+		assign products = recommended_products.value
+		assign use_product_recommends_api = false
+	endif
+
+	echo 'bundle.product-recommends.css' | asset_url | stylesheet_tag
+%}
+
+<script type="module" src="{{ 'bundle.product-recommends.js' | asset_url }}" defer></script>
+
+<product-recommends>
+
+	<div id="product-recommends" class="product-recommends" data-product-id="{{ product_id }}" data-section-id="{{ section_id }}" data-recommend-api="{{ use_product_recommends_api }}" data-return-limit="{{ return_limit }}" {% if use_product_recommends_api %}style="display: none;"{% endif %}>
+
+		{% liquid
+			for item in products
+				render 'card-product', product: item, lazyload: true
+			endfor
+		%}
+
+	</div>
+
+</product-recommends>
+
+{% schema %}
+{
+	"name": "Product Recommendations",
+	"tag": "section",
+	"class": "section",
+	"settings": [
+		{
+			"id": "title",
+			"type": "text",
+			"label": "Title",
+			"default": "You May Also Like"
+		}
+	]
+}
+{% endschema %}

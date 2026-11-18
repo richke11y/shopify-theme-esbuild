@@ -1,0 +1,60 @@
+{% liquid
+	assign notification_banner_active = section.settings.notification_banner_active
+%}
+
+{% liquid
+	if notification_banner_active
+		render 'header-notification-banner'
+	endif
+%}
+
+<div class="header__container">
+
+	<div class="header-section"></div>
+
+	<div class="header-section">
+
+		{% render 'header-wordmark' %}
+
+	</div>
+
+	<div class="header-section">
+
+		{% render 'header-localisation' %}
+
+	</div>
+
+</div>
+
+{% liquid
+	unless template == 'search'
+		render 'header-predictive-search'
+	endunless
+%}
+
+{% schema %}
+{
+	"name": "Header",
+	"tag": "header",
+	"class": "header",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Notification Banner"
+		},
+		{
+			"type": "checkbox",
+			"id": "notification_banner_active",
+			"label": "Notification Banner Active?",
+			"default": true
+		},
+		{
+			"type": "inline_richtext",
+			"id": "banner_message",
+			"label": "Banner Message",
+			"default": "Banner Message Goes Here",
+			"visible_if": "{{ section.settings.notification_banner_active == true }}"
+		}	
+	]
+}
+{% endschema %}

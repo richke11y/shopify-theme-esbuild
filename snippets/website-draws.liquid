@@ -1,0 +1,42 @@
+{% liquid
+	assign is_cart_template = false
+	assign is_collection_template = false
+	assign is_product_template = false
+	assign is_search_template = false
+
+	if template contains 'cart'
+		assign is_cart_template = true
+	endif
+
+	if template contains 'collection'
+		assign is_collection_template = true
+	endif
+
+	if template contains 'product'
+		assign is_product_template = true
+	endif
+
+	if template contains 'search' and search.performed
+		assign is_search_template = true
+	endif
+%}
+
+<website-draws>
+
+	<div class="draw-container">
+
+		{% liquid
+			section 'draw-navigation' 
+		
+			unless is_cart_template
+				section 'draw-mini-cart'
+			endunless
+
+			if is_collection_template or is_search_template
+				section 'draw-collection-filter-sort'
+			endif
+		%}
+
+	</div>
+
+</website-draws>

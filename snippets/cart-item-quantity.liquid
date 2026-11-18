@@ -1,0 +1,9 @@
+<item-quantity class="item-qty" data-item-index="{{ index }}" data-item-key="{{ item.key }}">
+
+	<button id="qty-decrease" class="item-qty__button icon icon--remove" name="Decrease Quantity" aria-label="Decrease Quantity">Decrease Quantity</button>
+
+	<input class="item-qty__input" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="quantity" pattern="[0-9]*">
+
+	<button id="qty-increase" class="item-qty__button icon icon--add" name="Increase Quantity" aria-label="Increase Quantity">Increase Quantity</button>
+
+</item-quantity>
