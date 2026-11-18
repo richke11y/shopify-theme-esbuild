@@ -1,0 +1,19 @@
+.img,
+.video {
+
+	display: block;
+	width: 100%;
+	height: auto;
+
+	font-size: 0;
+
+}
+
+.img--object-fit,
+.video--object-fit {
+
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+
+}
