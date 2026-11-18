@@ -1,6 +1,6 @@
 {% liquid
 	assign is_production = false
-	assign google_site_verification = 'no0w4-EG73QmMV_6TFt3QGj8fA5-z8EiDASkpDkiuSg'
+	assign google_site_verification = 'XXXXXXXXXX'
 	
 	assign shop_description = shop.description
 	assign shop_domain = shop.domain
@@ -80,7 +80,7 @@
 
 	<body>
 
-		{% render 'header' %}
+		{% section 'header' %}
 
 		<main class="main">
 
@@ -97,6 +97,7 @@
 		{% liquid
 			section 'footer'
 
+			render 'website-draws'
 			render 'body-script-bundles'
 		%}
 
