@@ -4,43 +4,43 @@
 		if template contains 'list-collections'
 
 			capture script_bundle
-				echo 'bundle.list-collections.js'
+				echo 'templates.bundle.list-collections.js'
 			endcapture
 
 		elsif template contains 'collection'
 
 			capture script_bundle
-				echo 'bundle.collection.js'
+				echo 'templates.bundle.collection.js'
 			endcapture
 
 		elsif template contains 'product'
 
 			capture script_bundle
-				echo 'bundle.product.js'
+				echo 'templates.bundle.product.js'
 			endcapture
 
 		elsif template contains 'article'
 
 			capture script_bundle
-				echo 'bundle.article.js'
+				echo 'templates.bundle.article.js'
 			endcapture
 
 		elsif template contains 'page'
 
 			capture script_bundle
-				echo 'bundle.page.js'
+				echo 'templates.bundle.page.js'
 			endcapture
 
 		elsif request.path == '/challenge'
 
 			capture script_bundle
-				echo 'bundle.challenge.js'
+				echo 'templates.bundle.challenge.js'
 			endcapture
 
 		else
 
 			capture script_bundle
-				echo 'bundle.' | append: template.name
+				echo 'templates.bundle.' | append: template.name
 				if template.suffix
 					echo '.' | append: template.suffix
 				endif
