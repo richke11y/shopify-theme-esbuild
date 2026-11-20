@@ -1,11 +1,13 @@
 const chokidar = require('chokidar');
+
 const { copyStaticFile } = require('../functions/copy-static-file.js');
 const { deleteStaticFile } = require('../functions/delete-static-file.js');
 
 module.exports = (config) => ({
 
 	name: 'watch-static-files',
-	setup() {
+
+	setup(build) {
 
 		if (config.mode === 'production') return;
 
@@ -13,29 +15,13 @@ module.exports = (config) => ({
 
 		const watcher = chokidar.watch(config.staticFileDirs);
 
-		watcher.on('add', (filePath) => {
+		watcher.on('add', async (filePath) => await copyStaticFile(config.outputDir, filePath, 'Added'));
 
-			console.log(`Added: ${filePath}`);
+		watcher.on('change', async (filePath) => await copyStaticFile(config.outputDir, filePath, 'Changed'));
 
-			copyStaticFile(config.outputDir, filePath);
-		
-		});
+		watcher.on('unlink', async (filePath) => await deleteStaticFile(config.outputDir, filePath));
 
-		watcher.on('change', (filePath) => {
-
-			console.log(`Changed: ${filePath}`);
-
-			copyStaticFile(config.outputDir, filePath);
-		
-		});
-
-		watcher.on('unlink', (filePath) => { 
-
-			console.log(`Deleted: ${filePath}`);
-
-			deleteStaticFile(config.outputDir, filePath);
-
-		});
+		watcher.on('error', (error) => console.error('Static file watcher error:', error));
 
 	}
 

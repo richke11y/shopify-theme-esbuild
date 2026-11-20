@@ -1,15 +1,14 @@
-const fs = require('fs');
+const fs = require('node:fs/promises');
+
 const { outputFilePath } = require('./output-file-path.js');
 
-const copyStaticFile = (outputFileDir, filePath) => {
+const copyStaticFile = async (outputFileDir, filePath, action) => {
 
-	fs.copyFile(filePath, outputFilePath(outputFileDir, filePath), (err) => {
+	console.log(`${action}: ${filePath}`);
 
-		if (err) throw err;
+	const outputPath = outputFilePath(outputFileDir, filePath);
 
-		// console.log(`Copied: ${filePath} >>> ${outputFilePath(outputFileDir, filePath)}`);
-
-	});
+	await fs.copyFile(filePath, outputPath);
 
 };
 

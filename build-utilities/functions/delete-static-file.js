@@ -1,15 +1,16 @@
-const fs = require('fs');
+const fs = require('node:fs/promises');
+
 const { outputFilePath } = require('./output-file-path.js');
 
-const deleteStaticFile = (outputFileDir, filePath) => {
+const deleteStaticFile = async (outputFileDir, filePath) => {
 
-	fs.rm(outputFilePath(outputFileDir, filePath), (err) => {
+	console.log(`Deleted: ${filePath}`);
 
-		if (err) throw err;
+	const outputPath = outputFilePath(outputFileDir, filePath);
 
-		console.log(`Deleted: ${outputFilePath(outputFileDir, filePath)}`);
+	await fs.rm(outputPath, { force: true });
 
-	});
+	console.log(`Deleted: ${outputPath}`);
 
 };
 
