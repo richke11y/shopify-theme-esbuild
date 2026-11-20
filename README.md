@@ -1,5 +1,7 @@
 # shopify-theme-esbuild
 
+## Description
+
 A bare-bones, Shopify Theme boilerplate that couples the Shopify CLI with esbuild. esbuild bundles and compiles SCSS/CSS and JS files and fires up a local development environment. Nothing fancy, a continual work in progress.
 
 Theme Version: 0.0.5
@@ -7,6 +9,20 @@ Theme Version: 0.0.5
 Date: 20/10/2026
 
 Web & Shopify Development: Rich Kelly (https://richkelly.uk)
+
+
+## Requirements
+
+- Node.js 22.12 or higher
+	https://nodejs.org/en/download
+- A Node.js package manager: npm, Yarn 1.x, or pnpm.
+	https://docs.npmjs.com/
+	https://classic.yarnpkg.com/en/
+	https://pnpm.io/installation
+- Git: 2.28.0 or higher
+	https://git-scm.com/install/
+- Shopify CLI
+	https://shopify.dev/docs/api/shopify-cli
 
 
 ## Licence
