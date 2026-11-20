@@ -2,10 +2,10 @@
 	assign cart_item_count = cart.item_count
 	assign cart_total_price = cart.total_price | money_without_trailing_zeros
 
-	echo 'bundle.draw-mini-cart.css' | asset_url | stylesheet_tag
+	echo 'draws.bundle.draw-mini-cart.css' | asset_url | stylesheet_tag
 %}
 
-<script type="module" src="{{ 'bundle.draw-mini-cart.js' | asset_url }}" defer></script>
+<script type="module" src="{{ 'draws.bundle.draw-mini-cart.js' | asset_url }}" defer></script>
 
 <draw-mini-cart>
 

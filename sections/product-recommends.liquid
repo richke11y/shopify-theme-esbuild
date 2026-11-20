@@ -15,10 +15,10 @@
 		assign use_product_recommends_api = false
 	endif
 
-	echo 'bundle.product-recommends.css' | asset_url | stylesheet_tag
+	echo 'product.bundle.product-recommends.css' | asset_url | stylesheet_tag
 %}
 
-<script type="module" src="{{ 'bundle.product-recommends.js' | asset_url }}" defer></script>
+<script type="module" src="{{ 'product.bundle.product-recommends.js' | asset_url }}" defer></script>
 
 <product-recommends>
 

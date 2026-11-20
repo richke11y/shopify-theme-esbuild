@@ -1,28 +1,25 @@
-const fs = require('fs');
+const fs = require('node:fs');
+const path = require('node:path');
 
 module.exports = (config) => ({
 
-	name: 'clean-assets-dir',
-	setup() {
+    name: 'clean-assets-dir',
 
-		fs.readdir(config.outputDir, (err, files) => {
+    setup() {
 
-			if (err) throw err;
+        console.log(`Cleaning directory ${config.outputDir}`);
 
-			console.log(`Cleaning directory ${config.outputDir}`);
+        fs.mkdirSync(config.outputDir, { recursive: true });
 
-			for (const file of files) {
+        for (const file of fs.readdirSync(config.outputDir)) {
 
-				fs.rm(`${config.outputDir}${file}`, (err) => {
+            fs.rmSync(path.join(config.outputDir, file), {
+                recursive: true,
+                force: true
+            });
 
-					if (err) throw err;
+        }
 
-				});
-
-			}
-
-		});
-
-	}
+    }
 
 });

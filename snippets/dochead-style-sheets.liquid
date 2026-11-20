@@ -2,43 +2,43 @@
 	if template contains 'list-collections'
 
 		capture style_bundle
-			echo 'bundle.list-collections.css'
+			echo 'templates.bundle.list-collections.css'
 		endcapture
 
 	elsif template contains 'collection'
 
 		capture style_bundle
-			echo 'bundle.collection.css'
+			echo 'templates.bundle.collection.css'
 		endcapture
 
 	elsif template contains 'product'
 
 		capture style_bundle
-			echo 'bundle.product.css'
+			echo 'templates.bundle.product.css'
 		endcapture
 
 	elsif template contains 'article'
 
 		capture style_bundle
-			echo 'bundle.article.css'
+			echo 'templates.bundle.article.css'
 		endcapture
 
 	elsif template contains 'page'
 
 		capture style_bundle
-			echo 'bundle.page.css'
+			echo 'templates.bundle.page.css'
 		endcapture
 
 	elsif request.path == '/challenge'
 
 		capture style_bundle
-			echo 'bundle.challenge.css'
+			echo 'templates.bundle.challenge.css'
 		endcapture
 
 	else
 
 		capture style_bundle
-			echo 'bundle.' | append: template.name
+			echo 'templates.bundle.' | append: template.name
 			if template.suffix
 				echo '.' | append: template.suffix
 			endif

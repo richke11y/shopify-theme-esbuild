@@ -5,7 +5,7 @@ const outputFilePath = (outputDir, filePath) => {
 	const fileExt = path.extname(filePath);
 	const fileName = path.basename(filePath, fileExt);
 
-	return `${outputDir}${fileName}${fileExt}`;
+	return path.join(outputDir, `${fileName}${fileExt}`);
 
 };
 

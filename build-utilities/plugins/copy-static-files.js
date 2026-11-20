@@ -1,29 +1,36 @@
-const fs = require('fs');
+const fs = require('node:fs');
+const path = require('node:path');
+
 const { copyStaticFile } = require('../functions/copy-static-file.js');
 
 module.exports = (config) => ({
 
-	name: 'copy-static-files',
-	setup(build) {
+    name: 'copy-static-files',
 
-		build.onEnd(() => {
+    setup(build) {
 
-			if (config.mode === 'development') return;
+        build.onEnd(async () => {
 
-			console.log('Copying static files...');
+            if (config.mode === 'development') return;
 
-			const staticFilePaths = [];
+            console.log('Copying static files...');
 
-			config.staticFileDirs.forEach((path) => {
+            const staticFilePaths = [];
 
-				fs.readdirSync(path).forEach((file) => staticFilePaths.push(`${path}${file}`));
+            config.staticFileDirs.forEach((directory) => {
 
-			});
+                fs.readdirSync(directory, { withFileTypes: true })
+                    .filter((file) => file.isFile())
+                    .forEach((file) => staticFilePaths.push(path.join(directory, file.name)));
 
-			staticFilePaths.forEach((filePath) => copyStaticFile(config.outputDir, filePath));
+            });
 
-		});
+            await Promise.all(
+                staticFilePaths.map((filePath) => copyStaticFile(config.outputDir, filePath))
+            );
 
-	}
+        });
+
+    }
 
 });

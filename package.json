@@ -1,6 +1,6 @@
 {
   "name": "shopify-theme-esbuild",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "private": false,
   "description": "A bare-bones, Shopify Theme boilerplate that couples the Shopify CLI with esbuild. Bundles and compiles SCSS/CSS and JS files and fires up a local development environment.",
   "author": "Rich Kelly <rich@richkelly.uk>",
@@ -12,7 +12,7 @@
   "scripts": {
     "start": "NODE_ENV=development run-p esbuild shopify:serve",
     "build": "NODE_ENV=production run-s esbuild shopify:check",
-    "esbuild": "node esbuild.js",
+    "esbuild": "node ./build-utilities/esbuild.js",
     "shopify:check": "shopify theme check --auto-correct",
     "shopify:serve": "shopify theme dev --store https://YOUR-SHOPIFY-STORE-URL.myshopify.com/ --ignore *.map"
   },
