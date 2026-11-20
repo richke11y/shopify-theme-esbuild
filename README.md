@@ -4,8 +4,8 @@
 
 A bare-bones, Shopify Theme boilerplate that couples the Shopify CLI with esbuild. esbuild bundles and compiles SCSS/CSS and JS files and fires up a local development environment. Nothing fancy, a continual work in progress.
 
-- Version: 0.0.5
-- Date: 20/10/2026
+- Version: 1.0.0
+- Date: 20/11/2026
 - Web & Shopify Development: Rich Kelly (https://richkelly.uk)
 
 
